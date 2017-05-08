@@ -1,7 +1,14 @@
 # CarND-Controls-PID
 Self-Driving Car Engineer Nanodegree Program
-
+PID Controller Project
 ---
+## PID Parameter and Tuning
+
+
+## PID Result and Discussion
+![GIF of PID Controller](https://github.com/buaalsy2003/CarND-PID-Control-Project/blob/master/PID.gif)
+
+With the tuned PID parameters, the car can stay in the lane and run smoothly in the simulator for many laps without major issues. In cases of high speed or sharp turn, the car may approach to lane edges or wiggle a little. The speed can go up to 70mph. 
 
 ## Dependencies
 
