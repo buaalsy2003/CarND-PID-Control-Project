@@ -1,14 +1,23 @@
 # CarND-Controls-PID
 Self-Driving Car Engineer Nanodegree Program
-PID Controller Project
+- PID Controller Project: implement a PID controller to enable autonamous driving in Simulator. 
 ---
 ## PID Parameter and Tuning
+There are 3 parameters for PID controller: proportional coefficient, integral coefficient, and derivative coefficient. 
+* Proportional: This parameter produces an output value that is proportional to the cross track error (CTE). Larger value tends to cause unstablity due to overshooting. Smaller value may result in unresponsible or unsensitive control. 
+* Integral: This parameter deals with certain offset or bias of the control system. It calcuates the sum of the instantaneous error over time and gives the accumulated offset that should have been corrected previously.
+* Derivative: This parameter is to reduce the oscillation and overshooting of the proportinal coefficient. It predicts system behavior and thus improves settling time and stability of the controller. 
 
+There are a few ways to tune these PID parameters such as manual tuning and twiddle. In this project, I tried manual tuning first and it worked just fine. 
+I first tried to change all 3 paremeters together and it turns out to be a bad idea. The car drove off the track immediately and I had no way to tell which parameters to tune next. 
+Then I started using only proportinal parameter. I began with 5 and it caused the car overshooting. It must be too big. So I reduce it from 5 gradually to 1. The it seemed better but the car oscillated a lot. I know I should add derivative parameters to solve the issue. But when the derivative parameter is too big like 5, the car wiggles a lot. So I reduce it down to 1. The result is acceptable. Then I tried change both proportional and derivative parameters little by little and find the best combination (0.07, 0, 1).
+For the integral term, I tried a few small values and it didn't change the result that much. This may be due to the provided CTE is accurate enough without much bias. But I still set the integral parameter to a small value 0.001 in case there is still some accumulated offset for the controller. 
 
 ## PID Result and Discussion
 ![GIF of PID Controller](https://github.com/buaalsy2003/CarND-PID-Control-Project/blob/master/PID.gif)
 
-With the tuned PID parameters, the car can stay in the lane and run smoothly in the simulator for many laps without major issues. In cases of high speed or sharp turn, the car may approach to lane edges or wiggle a little. The speed can go up to 70mph. 
+With the tuned PID parameters, the car can stay in the lane and run smoothly in the simulator for many laps without major issues. In cases of high speed or sharp turn, the car may approach to lane edges or wiggle a little. The speed can go up to 60mph.
+In the future, I will implement Twiddle algorithm to estimate parameter range before manual fine tune. This will speed up the process, especially for larger or more complex control system. 
 
 ## Dependencies
 
